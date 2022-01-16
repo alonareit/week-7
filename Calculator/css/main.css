@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@400;500;600;700&display=swap');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+    /* backgrounds colors */
+    --bg-color-main: hsl(222, 26%, 31%);
+    --bg-color-toggle: hsl(223, 31%, 20%);
+    --bg-color-screen: hsl(224, 36%, 15%);
+    
+    /* text colors */
+    --font-color-primary: hsl(221, 14%, 31%);
+    --font-color-white: #fff;
+    
+    /* keys colors */
+    --key-color-main:hsl(30, 25%, 89%);
+    --key-color-main-shadow:  hsl(28, 16%, 65%);
+    --key-color-side: hsl(225, 21%, 49%);
+    --key-color-side-shadow: hsl(224, 28%, 35%);
+    --key-color-equal:hsl(6, 63%, 50%);
+    --key-color-equal-shadow:hsl(6, 70%, 34%);
+}
+
+body {
+    font-family: 'Spartan', sans-serif;
+    font-weight: 700;
+    background: var(--bg-color-main);
+    /* width: 500px; */
+    /* margin: 4% auto; */
+
+   
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.header{
+    max-width: 500px;
+    color: var(--font-color-white);
+
+    margin: 30px auto; 
+
+}
+
+.header::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.header[class^="header__t"] {
+    float: left;
+}
+
+.header__title{
+    font-size: 26px;
+    width: 80%;
+    float: left;
+}
+
+.header__theme{
+    font-size: 11px;
+    width: 10%;
+    font-weight:600;
+    padding-top: 10px;
+    float: left;
+}
+
+.header__toggle{
+    width: 13%;
+    background-color: darkred;
+    float: left;
+}
+
+
+
+.calculator {
+    /* padding: 20px; */
+    /* -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2); */
+    border-radius: 1px;
+    /* width: 80px;  */
+    margin: 0 auto; 
+  }
+  
+  .input {
+    width: 500px;
+    background-color: var(--bg-color-screen);
+    border-radius: 10px;
+    height: 100px;
+    padding-right: 40px;
+    padding-top: 30px;
+    text-align: right;
+    /* margin-right: 6px; */
+    font-size: 2.5rem;
+    overflow-x: auto;
+    transition: all .2s ease-in-out;
+    margin: 30px auto; 
+    color:var(--font-color-white)
+  }
+  
+
+  
+  .buttons {
+    background-color: var(--bg-color-toggle);
+    border-radius: 10px;
+    width: 500px;
+    margin: 0 auto; 
+    
+  }
+  
+  .operators {}
+  
+  .operators div {
+    display: inline-block;
+    border: 1px solid #bbb;
+    border-radius: 1px;
+    width: 80px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+
+    background-color: var(--key-color-main);
+    transition: border-color .2s ease-in-out, background-color .2s, box-shadow .2s;
+  }
+  
+  /* .operators div:hover {
+    background-color: #ddd;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    border-color: #aaa;
+  }
+  
+  .operators div:active {
+    font-weight: bold;
+  }
+   */
+  .leftPanel {
+    display: inline-block;
+  }
+  
+  .numbers div {
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 32px;
+    width: 90px;
+    text-align: center;
+    padding: 10px;
+    margin: 20px 4px 0px 20px;
+    cursor: pointer;
+    background-color: var(--key-color-main);
+    box-shadow: 1px 4px var(--key-color-main-shadow);
+    transition: border-color .2s ease-in-out, background-color .2s, box-shadow .2s;
+  }
+  
+  
+  div.equal {
+    display: inline-block;
+    font-size:20px;
+    border-radius: 10px;
+    width: 210px;
+    text-align: center;
+    padding: 15px;
+    margin: 20px 4px 30px 20px;
+    /* vertical-align: top; */
+    cursor: pointer;
+    color: #FFF;
+    background-color: var( --key-color-equal);
+    box-shadow: 1px 4px var(--key-color-equal-shadow);
+    transition: all .2s ease-in-out;
+  }
+    
+  #clear ,#delete{
+    background-color: var(--key-color-side);
+    color: var(--font-color-white);
+    box-shadow: 1px 4px var(--key-color-side-shadow);
+  }
+  
+
+  
+  div.equal:active {
+    font-weight: bold;
+  }
+
+  .divide {
+    content: "\2215";
+  }
