@@ -1,0 +1,20 @@
+
+:root {
+    --bg-color-main: hsl(0, 0%, 90%);
+    --bg-color-toggle: hsl(0, 5%, 81%);
+    --bg-color-screen: hsl(0, 5%, 81%);
+    --bg-color-input:rgb(240, 240, 240);
+    
+    --font-color-header:hsl(60, 10%, 19%);
+    --font-color-primary: hsl(60, 10%, 19%);
+    --font-color-side-key:hsl(60, 10%, 19%);
+    --font-color-input:hsl(60, 10%, 19%);
+
+    --key-color-main:hsl(45, 7%, 89%);
+    --key-color-main-shadow:  hsl(35, 11%, 61%);
+    --key-color-side: hsl(185, 42%, 37%);
+    --key-color-side-shadow: hsl(185, 58%, 25%);
+    --key-color-equal:hsl(25, 98%, 40%);
+    --key-color-equal-shadow: hsl(25, 99%, 27%);
+}
+

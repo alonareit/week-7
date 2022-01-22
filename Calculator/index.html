@@ -6,64 +6,78 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/theme1.css" id="theme-css" />
   
   <title>Frontend Mentor | Calculator app</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
+    .attribution { font-size: 11px; text-align: center; position: absolute;bottom:0; }
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
 <body>
-    <header class="header">
-        <h1 class="header__title">calc</h1>
+  <div class="container">
+    <header class="calc__header">
+      <div class="theme__numbers">
+        <ol>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ol>
 
-        <h2 class="header__theme">THEME</h2>
-        <h2 class="header__theme__numbers"></h2>
-    </header>
-    <div class="calculator">
-      <div class="input" id="input"></div>
-      <div class="buttons">
-        <div class="leftPanel">
-          <div class="numbers">
-            <div>7</div>
-            <div>8</div>
-            <div>9</div>
-            <div id="delete">DEL</div>
-          </div>
-          
-          <div class="numbers">
-            <div>4</div>
-            <div>5</div>
-            <div>6</div>
-            <div class="operators">+</div>
-          </div>
-          <div class="numbers">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div class="operators">-</div>
-          </div>
-          <div class="numbers">
-            <div>.</div>
-            <div>0</div>
-            <div>&divide;</div>
-            <div class="operators">&times;</div>
-          </div>
-        </div>
-        
-        <div class="equal" id="clear">RESET</div>
-        <div class="equal" id="result">=</div>
       </div>
+      <h1 class="calc__title">calc</h1>
+      <h2 class="theme__title">THEME</h2>
+      <form class="toggle_radio">
+        <input type="radio"  checked class="toggle_option" id="first_toggle" name="toggle_option" value="1"  checked>
+        <input type="radio" class="toggle_option" id="second_toggle" name="toggle_option" value="2">
+        <input type="radio" class="toggle_option" id="third_toggle" name="toggle_option" value="3">
+        <label for="first_toggle"></label>
+        <label for="second_toggle"></label>
+        <label for="third_toggle"></label>
+        <div class="toggle_option_slider"></div>
+      </form>
+  </header>
+  <div class="calculator">
+    <div class="calculator__input">
+      <div id="operation"></div>
+      <div data-previous-operand class="previous__operand"></div>
+      <div data-current-operand class="current__operand"></div>
     </div>
 
-    <script src="sctipt.js"></script>
+    <div class="calculator__buttons">
+        <button data-number class="btn number">7</button>
+        <button data-number class="btn number">8</button>
+        <button data-number class="btn number">9</button>
+        <button data-delete class="btn operator bg-side" id="delete">DEL</button>
 
-  
-  <!-- <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Alona</a>. -->
+        <button data-number class="btn number">4</button>
+        <button data-number class="btn number">5</button>
+        <button data-number class="btn number">6</button>
+        <button data-operation class="btn operator">+</button>
+      
+        <button data-number class="btn number">1</button>
+        <button data-number class="btn number">2</button>
+        <button data-number class="btn number">3</button>
+        <button data-operation class="btn operator">-</button>
+     
+        <button data-number class="btn number">.</button>
+        <button data-number class="btn number">0</button>
+        <button data-operation class="btn operator">/</button>
+        <button data-operation class="btn operator">x</button>
+
+        <button data-reset class="btn span-2 operator bg-side">RESET</button>
+        <button data-equals class="btn span-2 operator bg-equal">=</button>
+
+  </div> 
   </div>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Alona</a>.
+  </div>
+  <script src="sctipt.js"></script>
 </body>
 </html>

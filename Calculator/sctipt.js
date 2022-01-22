@@ -1,120 +1,167 @@
 "use strict";
 
-var input = document.getElementById('input'), // input/output button
-  number = document.querySelectorAll('.numbers div'), // number buttons
-  operator = document.querySelectorAll('.operators div'), // operator buttons
-  result = document.getElementById('result'), // equal button
-  clear = document.getElementById('clear'), // clear button
-  resultDisplayed = false; // flag to keep an eye on what output is displayed
+// Theamas changer
+var themeToggleFirst = document.querySelector("#first_toggle");
+var themeToggleSecond = document.querySelector("#second_toggle");
+var themeToggleThird = document.querySelector("#third_toggle");
 
-// adding click handlers to number buttons
-for (var i = 0; i < number.length; i++) {
-  number[i].addEventListener("click", function(e) {
-
-    // storing current input string and its last character in variables - used later
-    var currentString = input.innerHTML;
-    var lastChar = currentString[currentString.length - 1];
-
-    // if result is not diplayed, just keep adding
-    if (resultDisplayed === false) {
-      input.innerHTML += e.target.innerHTML;
-    } else if (resultDisplayed === true && lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
-      // if result is currently displayed and user pressed an operator
-      // we need to keep on adding to the string for next operation
-      resultDisplayed = false;
-      input.innerHTML += e.target.innerHTML;
-    } else {
-      // if result is currently displayed and user pressed a number
-      // we need clear the input string and add the new input to start the new opration
-      resultDisplayed = false;
-      input.innerHTML = "";
-      input.innerHTML += e.target.innerHTML;
-    }
-
-  });
+function changeTheme(themeName) {
+  document.getElementById("theme-css").href = `css/${themeName}`;
 }
 
-// adding click handlers to number buttons
-for (var i = 0; i < operator.length; i++) {
-  operator[i].addEventListener("click", function(e) {
-
-    // storing current input string and its last character in variables - used later
-    var currentString = input.innerHTML;
-    var lastChar = currentString[currentString.length - 1];
-
-    // if last character entered is an operator, replace it with the currently pressed one
-    if (lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
-      var newString = currentString.substring(0, currentString.length - 1) + e.target.innerHTML;
-      input.innerHTML = newString;
-    } else if (currentString.length == 0) {
-      // if first key pressed is an opearator, don't do anything
-      console.log("enter a number first");
-    } else {
-      // else just add the operator pressed to the input
-      input.innerHTML += e.target.innerHTML;
-    }
-
-  });
-}
-
-// on click of 'equal' button
-result.addEventListener("click", function() {
-
-  // this is the string that we will be processing eg. -10+26+33-56*34/23
-  var inputString = input.innerHTML;
-
-  // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
-  var numbers = inputString.split(/\+|\-|\×|\÷/g);
-
-  // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
-  // first we replace all the numbers and dot with empty string and then split
-  var operators = inputString.replace(/[0-9]|\./g, "").split("");
-
-  console.log(inputString);
-  console.log(operators);
-  console.log(numbers);
-  console.log("----------------------------");
-
-  // now we are looping through the array and doing one operation at a time.
-  // first divide, then multiply, then subtraction and then addition
-  // as we move we are alterning the original numbers and operators array
-  // the final element remaining in the array will be the output
-
-  var divide = operators.indexOf("÷");
-  while (divide != -1) {
-    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
-    operators.splice(divide, 1);
-    divide = operators.indexOf("÷");
-  }
-
-  var multiply = operators.indexOf("×");
-  while (multiply != -1) {
-    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
-    operators.splice(multiply, 1);
-    multiply = operators.indexOf("×");
-  }
-
-  var subtract = operators.indexOf("-");
-  while (subtract != -1) {
-    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
-    operators.splice(subtract, 1);
-    subtract = operators.indexOf("-");
-  }
-
-  var add = operators.indexOf("+");
-  while (add != -1) {
-    // using parseFloat is necessary, otherwise it will result in string concatenation :)
-    numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
-    operators.splice(add, 1);
-    add = operators.indexOf("+");
-  }
-
-  input.innerHTML = numbers[0]; // displaying the output
-
-  resultDisplayed = true; // turning flag if result is displayed
+themeToggleFirst.addEventListener("click", () => {
+  changeTheme("theme1.css");
 });
 
-// clearing the input on press of clear
-clear.addEventListener("click", function() {
-  input.innerHTML = "";
-})
+themeToggleSecond.addEventListener("click", () => {
+  changeTheme("theme2.css");
+});
+
+themeToggleThird.addEventListener("click", () => {
+  changeTheme("theme3.css");
+});
+
+
+// Toggle switcher
+$(".toggle_radio .toggle_option").change(function(){ 
+  if( $(this).is(":checked") ){ 
+    var val = $(this).val();
+    console.log(val + " clicked");
+        if(val == 1){
+          $('.toggle_radio').addClass('theme1');
+          $('.toggle_radio').removeClass('theme2');
+          $('.toggle_radio').removeClass('theme3');
+            }
+          else if (val == 2){
+              $('.toggle_radio').addClass('theme2');
+              $('.toggle_radio').removeClass('theme1');
+              $('.toggle_radio').removeClass('theme3');
+               } 
+              else if (val == 3){
+                 $('.toggle_radio').addClass('theme3');
+                 $('.toggle_radio').removeClass('theme1');
+                 $('.toggle_radio').removeClass('theme2'); }
+        }
+});
+
+//calculator
+
+class Calculator { //create a new class 
+  constructor(previousOperandTextElemenet, currentOperandTextElemenet) {
+    this.previousOperandTextElemenet = previousOperandTextElemenet;
+    this.currentOperandTextElemenet = currentOperandTextElemenet;
+    this.reset();
+  }
+
+  reset() {
+    this.currentOperand = "";
+    this.previousOperand = "";
+    this.operation = undefined;
+    operationDisplay.innerText = "";
+  }
+
+  delete() {
+    if (this.currentOperandTextElemenet.innerText === "Infinity") { 
+      calculator.reset();
+    } else {
+      this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    }
+  }
+
+  appendNumber(number) {
+    if (number === "." && this.currentOperand.includes(".")) return; //if the input already include a dot and the new var is dos so return
+    this.currentOperand = this.currentOperand.toString() + number.toString(); //append
+  }
+
+  chooseOperation() {
+    if (this.currentOperand === "") return;
+    if (this.previousOperand !== "") {
+      this.compute();
+    }
+    this.previousOperand = this.currentOperand;
+    this.currentOperand = "";
+  }
+
+  compute() {
+    let result;
+    const prev = parseFloat(this.previousOperand);
+    const current = parseFloat(this.currentOperand);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (operationDisplay.innerText) {
+      case "+":
+        result = prev + current;
+        break;
+      case "-":
+        result = prev - current;
+        break;
+      case "x":
+        result = prev * current;
+        break;
+      case "/":
+        result = prev / current;
+        break;
+      default:
+        return;
+    }
+    this.currentOperand = result;
+    this.previousOperand = "";
+    this.operation = undefined;
+    this.buttonDisplay = "";
+  }
+
+  updateDisplay() {
+    this.currentOperandTextElemenet.innerText = this.currentOperand;
+    this.previousOperandTextElemenet.innerText = this.previousOperand;
+  }
+}
+
+const numberButtons = document.querySelectorAll("[data-number]");
+const operationButtons = document.querySelectorAll("[data-operation]");
+const equalsButton = document.querySelector("[data-equals]");
+const resetButton = document.querySelector("[data-reset]");
+const deleteButton = document.querySelector("[data-delete]");
+const operationDisplay = document.getElementById("operation");
+const previousOperandTextElemenet = document.querySelector(
+  "[data-previous-operand]"
+);
+const currentOperandTextElemenet = document.querySelector(
+  "[data-current-operand]"
+);
+
+const calculator = new Calculator(
+  previousOperandTextElemenet,
+  currentOperandTextElemenet
+);
+
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    calculator.appendNumber(button.innerText);
+    calculator.updateDisplay();
+  });
+});
+
+operationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    calculator.chooseOperation();
+    operationDisplay.innerText = button.innerText;
+    calculator.updateDisplay();
+  });
+});
+
+equalsButton.addEventListener("click", (button) => {
+  calculator.compute();
+  operationDisplay.innerText = "";
+  calculator.updateDisplay();
+});
+
+resetButton.addEventListener("click", (button) => {
+  calculator.reset();
+  calculator.updateDisplay();
+});
+
+deleteButton.addEventListener("click", (button) => {
+  calculator.delete();
+  calculator.updateDisplay();
+});
+
+
